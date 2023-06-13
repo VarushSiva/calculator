@@ -38,3 +38,15 @@ function handleNumber(num) {
     }
 }
 
+operator.forEach(op => op.addEventListener("click", (e) => {
+    handleOperator(e.target.textContent);
+    prevScreen.textContent = `${previousValue} ${operation}`;
+    currentScreen.textContent = currentValue;
+}))
+
+function handleOperator(op) {
+    operation = op;
+    previousValue = currentValue;
+    currentValue = "";
+}
+
