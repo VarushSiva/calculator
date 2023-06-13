@@ -18,7 +18,10 @@ let firstNumber;
 let operator;
 let secondNumber;
 
-function operate(a, operator, b) {
+function operate(string) {
+    let str = string.split(/(?=[+]) | (?<=[+])]/g);
+    
+    console.log(str)
     switch(operator) {
         case "+":
             add(a,b);
