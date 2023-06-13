@@ -14,6 +14,10 @@ function divide(a,b) {
     return a / b;
 }
 
+function modulo(a,b) {
+    return a % b;
+}
+
 let previousValue = "";
 let operation = "";
 let currentValue = "";
@@ -39,9 +43,11 @@ function handleNumber(num) {
 }
 
 operator.forEach(op => op.addEventListener("click", (e) => {
-    handleOperator(e.target.textContent);
-    prevScreen.textContent = `${previousValue} ${operation}`;
-    currentScreen.textContent = currentValue;
+    if (currentValue !== "") {
+        handleOperator(e.target.textContent);
+        prevScreen.textContent = `${previousValue} ${operation}`;
+        currentScreen.textContent = currentValue;
+    }
 }))
 
 function handleOperator(op) {
@@ -65,3 +71,48 @@ del.addEventListener("click", () => {
     currentScreen.textContent = currentValue;
 })
 
+evaluate.addEventListener("click", () => {
+    if (currentValue !== "" && previousValue !== "") {
+        calculate();
+        if (currentValue.length < 14) {
+            currentScreen.textContent = currentValue;
+        } else {
+            currentScreen.textContent = currentValue.slice(0,14) + "...";
+        }
+    }
+})
+
+function calculate() {
+    previousValue = Number(previousValue);
+    currentValue = Number(currentValue);
+    if (operation === "+") {
+        currentValue = add(previousValue, currentValue);
+    } else if (operation === "-") {
+        currentValue = subtract(previousValue, currentValue);
+    } else if (operation === "x") {
+        currentValue = multiply(previousValue, currentValue);
+    } else if (operation === "÷") {
+        currentValue = divide(previousValue, currentValue);
+    } else if (operation === "%") {
+        currentValue = modulo(previousValue, currentValue);
+    }
+
+    currentValue = roundNumber(currentValue).toString();
+    previousValue = "";
+    prevScreen.textContent = "";
+    currentScreen.textContent = currentValue;
+}
+
+decimal.addEventListener("click", () => {
+    if (currentValue.length === 0) {
+        currentValue += "0."
+    }
+    if(currentValue.indexOf(".") === -1) {
+        currentValue += ".";
+    }
+    currentScreen.textContent = currentValue;
+})
+
+function roundNumber(num) {
+    return Math.round(num*1000)/1000;
+}
