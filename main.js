@@ -14,26 +14,27 @@ function divide(a,b) {
     return a / b;
 }
 
-let firstNumber;
-let operator;
-let secondNumber;
+let previousValue = "";
+let operation = "";
+let currentValue = "";
 
-function operate(string) {
-    let str = string.split(/(?=[+]) | (?<=[+])]/g);
-    
-    console.log(str)
-    switch(operator) {
-        case "+":
-            add(a,b);
-            break;
-        case "-":
-            subtract(a,b);
-            break;
-        case "*":
-            multiply(a,b);
-            break;
-        case "/":
-            divide(a,b);
-            break;
+let clear = document.querySelector(".AC");
+let del = document.querySelector(".DE");
+let decimal = document.querySelector(".decimal");
+let evaluate = document.querySelector(".eval");
+let operator = document.querySelectorAll(".operator");
+let numbers = document.querySelectorAll(".number")
+let prevScreen = document.querySelector(".prev");
+let currentScreen = document.querySelector(".current")
+
+numbers.forEach(number => number.addEventListener('click', (e) => {
+    handleNumber(e.target.textContent);
+    currentScreen.textContent = currentValue;
+}));
+
+function handleNumber(num) {
+    if (currentValue.length < 7) {
+        currentValue += num;
     }
 }
+
