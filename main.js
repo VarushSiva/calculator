@@ -50,3 +50,18 @@ function handleOperator(op) {
     currentValue = "";
 }
 
+clear.addEventListener("click", () => {
+    previousValue = "";
+    operation = "";
+    currentValue = "";
+    prevScreen.textContent = previousValue;
+    currentScreen.textContent = currentValue;
+})
+
+del.addEventListener("click", () => {
+    if (currentValue.length > 0) {
+        currentValue = currentValue.slice(0,-1)
+    }
+    currentScreen.textContent = currentValue;
+})
+
