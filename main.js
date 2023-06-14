@@ -95,6 +95,7 @@ function evaluation() {
     if (currentValue !== "" && previousValue !== "") {
         calculate();
         currentScreen.textContent = previousValue;
+        currentValue = previousValue;
         previousValue = "";
         prevScreen.textContent = "";
     }
