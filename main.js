@@ -40,8 +40,13 @@ numbers.forEach(number => number.addEventListener('click', (e) => {
 function handleNumber(num) {
     if (currentValue.length < 7) {
         currentValue += num;
+        currentScreen.textContent = currentValue;
     }
-    currentScreen.textContent = currentValue;
+    if (operation === "=") {
+        currentValue = num;
+        currentScreen.textContent = currentValue;
+    }
+    
 }
 
 operator.forEach(op => op.addEventListener("click", (e) => {
@@ -98,6 +103,7 @@ function evaluation() {
         currentValue = previousValue;
         previousValue = "";
         prevScreen.textContent = "";
+        operation = "=";
     }
 }
 
